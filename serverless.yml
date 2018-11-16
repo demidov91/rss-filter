@@ -1,0 +1,24 @@
+service: rss
+
+provider:
+  name: aws
+  runtime: python3.6
+  region: eu-central-1
+
+package:
+  include:
+    - run.py
+
+functions:
+  rss:
+    handler: run.naviny_rss
+    events:
+      - http:
+          path: naviny
+          method: get
+          integration: lambda
+          response:
+            headers:
+              Content-Type: "'text/xml'"
+            template: $input.path('$')
+

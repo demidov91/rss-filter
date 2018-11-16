@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  build:
+    docker:
+     - image: circleci/python:3.6-stretch-node-browsers
+    steps:
+     - checkout
+
+     - run:
+         name: Install and prepare serverless.
+         command: |
+           sudo npm i -g serverless
+           npm install
+
+     - run:
+         name: Deploy to aws.
+         command: |
+          serverless deploy -s "$CIRCLE_BRANCH"
