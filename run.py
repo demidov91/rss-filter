@@ -3,7 +3,13 @@ from xml.etree import ElementTree as ET
 
 
 def naviny_rss(event, context):
-    return _get_rss_by_author(event['query']['author']).decode()
+    return {
+        'statusCode': 200,
+        'headers': {'Content-Type': 'text/xml', },
+        'body': _get_rss_by_author(event['query']['author']),
+    }
+
+    # return _get_rss_by_author(event['query']['author']).decode()
 
 
 def _get_rss_by_author(author: str):

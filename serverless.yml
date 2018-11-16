@@ -16,9 +16,5 @@ functions:
       - http:
           path: naviny
           method: get
-          integration: lambda
-          response:
-            headers:
-              Content-Type: "'text/xml'"
-            template: $input.path('$')
+
 
